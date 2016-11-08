@@ -14,6 +14,7 @@ public class TestMatrice implements Runnable {
     public static int VettoreSomma[];
     public static int RigaAttiva=0;
     public static boolean OKThread;
+    public static int tmp;
 
     /**
      * @param args the command line arguments
@@ -38,6 +39,7 @@ public class TestMatrice implements Runnable {
             Sommatori[i].start();
             while(OKThread==false){/*Do Nothing*/}
         }
+        System.out.println("TOTALE: "+tmp);
     }
 
     @Override
@@ -47,6 +49,7 @@ public class TestMatrice implements Runnable {
             System.out.println(matrix.matrice[RigaAttiva][i]);
             System.out.println("Somma Riga "+RigaAttiva+" e colonna "+i+" : "+VettoreSomma[RigaAttiva]);
         }
+        tmp += VettoreSomma[RigaAttiva];
         System.out.println("END OF LINE");
         OKThread = true;
     }
