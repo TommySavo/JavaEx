@@ -22,4 +22,12 @@ public class TMatrice {
             }
         }
     }
+    public void stampa(){
+        for(int i = 0;i<N;i++){
+            for(int j = 0; j<M; j++){
+                System.out.print(matrice[i][j]+" ");
+            }
+            System.out.println("");
+        }
+    }
 }
