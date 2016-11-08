@@ -10,17 +10,45 @@ package javathreads;
  * @author Lorenzo
  */
 public class TestMatrice implements Runnable {
+    public static TMatrice matrix;
+    public static int VettoreSomma[];
+    public static int RigaAttiva=0;
+    public static boolean OKThread;
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        matrix = new  TMatrice(3, 3);
+        matrix.stampa();
+        System.out.println(matrix.matrice[RigaAttiva].length);
+        VettoreSomma = new int[matrix.matrice[RigaAttiva].length];
+        for(int i = 0; i<matrix.matrice[RigaAttiva].length;i++){
+            VettoreSomma[i] = 0;
+        }
+        TestMatrice ThreadArray[];
+        Thread Sommatori[];
+        ThreadArray = new TestMatrice[matrix.matrice[RigaAttiva].length];
+        Sommatori = new Thread[matrix.matrice[RigaAttiva].length];
+        for(int i=0;i<matrix.matrice[RigaAttiva].length;i++){
+            OKThread = false;
+            RigaAttiva = i;
+            ThreadArray[i]=new TestMatrice();
+            Sommatori[i]=new Thread(ThreadArray[i]);
+            Sommatori[i].start();
+            while(OKThread==false){/*Do Nothing*/}
+        }
     }
 
     @Override
     public void run() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for(int i = 0; i<matrix.matrice[RigaAttiva].length;i++){
+            VettoreSomma[RigaAttiva]+=matrix.matrice[RigaAttiva][i];
+            System.out.println(matrix.matrice[RigaAttiva][i]);
+            System.out.println("Somma Riga "+RigaAttiva+" e colonna "+i+" : "+VettoreSomma[RigaAttiva]);
+        }
+        System.out.println("END OF LINE");
+        OKThread = true;
     }
     
 }
